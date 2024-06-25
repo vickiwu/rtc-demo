@@ -2,7 +2,7 @@
   <div class="web-preview">
     <div class="page-header">
       <!-- <a
-        href="https://www.pano.video"
+        href="#"
         target="_blank"
         :style="{ opacity: 1 }"
         rel="noreferrer"
@@ -354,7 +354,7 @@ export default {
             'a',
             {
               attrs: {
-                href: 'https://www.pano.video/',
+                href: '#',
                 target: '_blank',
               },
             },

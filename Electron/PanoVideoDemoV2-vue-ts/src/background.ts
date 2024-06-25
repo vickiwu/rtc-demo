@@ -244,7 +244,7 @@ function createShareCtrlWindow() {
       webSecurity: false,
       enableRemoteModule: true,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
-      devTools: true,
+      devTools: true, // 允许打开开发者工具
     },
   };
   // annotation window
@@ -310,7 +310,7 @@ async function createWindow() {
       nodeIntegration: true,
       webSecurity: false,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
-      devTools: true,
+      devTools: true, // 允许打开开发者工具
     },
   });
   mainWindow.webContents.openDevTools();

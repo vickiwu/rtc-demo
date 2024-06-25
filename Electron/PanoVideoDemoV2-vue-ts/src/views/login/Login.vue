@@ -389,16 +389,6 @@ export default {
       });
     },
     goJoin() {
-      console.log('this.form', this.form);
-      console.log('this.channelId', this.channelId);
-      console.log('this.userName', this.userName);
-      console.log('this.userId', this.userId);
-      console.log('this.appId', this.appId);
-      console.log('this.token', this.token);
-
-      // this.channelId = values.channelId;
-      // this.userName = values.username;
-      // this.userId = values.userId;
       if (this.pocEnabled) {
         this.appId = this.pocConfig.appId;
         this.token = genPocToken(
@@ -409,9 +399,6 @@ export default {
         );
         window.RtcEngine.setServer(this.pocConfig.serverAddr);
         RtsService.setServer(this.pocConfig.serverAddr);
-      } else {
-        // this.appId = values.appId;
-        // this.token = values.token;
       }
       localStorage.setItem(LS_KEY_USERNAME, this.userName);
       localStorage.setItem(LS_KEY_CHANNELID, this.channelId);
