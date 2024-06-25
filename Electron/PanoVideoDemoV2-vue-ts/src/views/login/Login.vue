@@ -97,12 +97,12 @@
           >
             立即加入
           </a-button>
-          <Tooltip placement="top" title="私有化设置" class="poc-setting">
+          <!-- <Tooltip placement="top" title="私有化设置" class="poc-setting">
             <a-icon type="setting" @click="togglePoc" />
-          </Tooltip>
+          </Tooltip> -->
         </div>
       </a-form>
-      <a-form :form="form" @submit.prevent="goJoin" class="tableListForm2">
+      <!-- <a-form :form="form" @submit.prevent="goJoin" class="tableListForm2">
         <a-form-item label="AppId" v-if="!pocEnabled">
           <a-input
             name="appId"
@@ -222,11 +222,11 @@
           >
             立即加入
           </a-button>
-          <Tooltip placement="top" title="私有化设置" class="poc-setting">
+           <Tooltip placement="top" title="私有化设置" class="poc-setting">
             <a-icon type="setting" @click="togglePoc" />
-          </Tooltip>
+          </Tooltip> 
         </div>
-      </a-form>
+      </a-form> -->
       <Setting
         v-if="$IS_ELECTRON"
         :visible="settingShow"
@@ -260,7 +260,7 @@ import {
   Row,
   Col,
   Icon,
-  Tooltip,
+  // Tooltip,
 } from 'ant-design-vue';
 import { mapGetters } from 'vuex';
 import {
@@ -342,7 +342,7 @@ export default {
     'a-row': Row,
     'a-col': Col,
     'a-icon': Icon,
-    Tooltip,
+    // Tooltip,
     Setting,
     DeviceStatus,
     WindowFrame,
@@ -374,7 +374,6 @@ export default {
       localStorage.setItem(localCacheKeyOpenCamAtStart, value ? 'yes' : 'no');
     },
     goJoin2() {
-      console.log('this.form', this.form2);
       this.form2.validateFields((err, values) => {
         console.log('values', values);
         console.log('err', err);
