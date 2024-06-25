@@ -1,7 +1,7 @@
 <template>
   <div class="about-wrapper">
     <!-- <img src="../../assets/img/logo.png" alt="logo" /> -->
-    <strong>构建云上的每一次美好互动</strong>
+    <strong>一切皆是消息</strong>
     <em>版本号</em>
     <em>{{ version }}</em>
     <span>南京次声波科技有限公司</span>

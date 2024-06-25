@@ -4,6 +4,12 @@
        url('iconfont.woff?t=1646794604713') format('woff'),
        url('iconfont.ttf?t=1646794604713') format('truetype');
 }
+@font-face {
+  font-family: "iconfont"; /* Project id 4598181 */
+  src: url('iconfont_2.woff2?t=1719296622664') format('woff2'),
+       url('iconfont_2.woff?t=1719296622664') format('woff'),
+       url('iconfont_2.ttf?t=1719296622664') format('truetype');
+}
 
 .iconfont {
   font-family: "iconfont" !important;
@@ -581,3 +587,19 @@
   content: "\e619";
 }
 
+
+.icon-guanyuwomen1:before {
+  content: "\e6aa";
+}
+
+.icon-guanyuwomen2:before {
+  content: "\e691";
+}
+
+.icon-guanyuwomen3:before {
+  content: "\e654";
+}
+
+.icon-guanyuwomen:before {
+  content: "\e69a";
+}

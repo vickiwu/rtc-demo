@@ -72,7 +72,7 @@ export default {
         { value: 'audio', text: '音频', icon: 'audio' },
         { value: 'feedback', text: '反馈与报障', icon: 'feedback' },
         { value: 'audioFault', text: '音频报障', icon: 'audio-fault' },
-        { value: 'about', text: '关于我们', icon: 'about' },
+        { value: 'guanyuwomen', text: '关于我们', icon: 'guanyuwomen' },
       ],
       activeCategory: 'normal',
     };
