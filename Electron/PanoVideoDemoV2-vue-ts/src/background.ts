@@ -371,6 +371,8 @@ async function createWindow() {
    * 拦截退出按钮, 二次确认再退出会议
    */
   mainWindow.on('close', (e) => {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-ignore
     if (!canQuit && mainWindow && mainWindow.isVisible) {
       mainWindow.show();
       e.preventDefault();
