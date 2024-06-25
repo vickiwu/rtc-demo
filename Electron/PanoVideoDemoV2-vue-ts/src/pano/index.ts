@@ -605,7 +605,7 @@ export function startAudioDump(description: string, contact: string) {
     window.rtcEngine.sendFeedback({
       contact,
       description,
-      product: 'PanoVideoCall',
+      product: '在线会议',
       type: '1',
       uploadLogs: true,
     });

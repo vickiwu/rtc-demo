@@ -1,3 +1,3 @@
 module.exports = {
-  APP_NAME: 'PanoVideoCall',
+  APP_NAME: '在线会议',
 };

@@ -244,6 +244,7 @@ function createShareCtrlWindow() {
       webSecurity: false,
       enableRemoteModule: true,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+      devTools: true,
     },
   };
   // annotation window
@@ -309,8 +310,10 @@ async function createWindow() {
       nodeIntegration: true,
       webSecurity: false,
       contextIsolation: !process.env.ELECTRON_NODE_INTEGRATION,
+      devTools: true,
     },
   });
+  mainWindow.webContents.openDevTools();
   if (isMac) {
     mainWindow.setWindowButtonVisibility(true);
   }

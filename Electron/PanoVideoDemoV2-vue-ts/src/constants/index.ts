@@ -29,7 +29,7 @@ export const defaultResolution = '8';
 export const IOS_DOWNLOAD_URL =
   'https://apps.apple.com/cn/app/pano-video-call/id1508485860';
 export const ANDROID_DOWNLOAD_URL =
-  'https://www.pano.video/download/PanoVideoCall_1.2.4.apk';
+  'https://www.pano.video/download/在线会议_1.2.4.apk';
 
 export const MOMENT_FOR_UNSUBSCRIBE = 0;
 

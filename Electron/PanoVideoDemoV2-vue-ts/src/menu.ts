@@ -44,14 +44,14 @@ export default class MenuBuilder {
 
   buildDarwinTemplate(): MenuItemConstructorOptions[] {
     const subMenuAbout: DarwinMenuItemConstructorOptions = {
-      label: 'PanoVideoCall',
+      label: '在线会议',
       submenu: [
         {
-          label: '关于 PanoVideoCall',
+          label: '关于 在线会议',
           selector: 'orderFrontStandardAboutPanel:',
         },
         {
-          label: '隐藏 PanoVideoCall',
+          label: '隐藏 在线会议',
           accelerator: 'Command+H',
           selector: 'hide:',
         },

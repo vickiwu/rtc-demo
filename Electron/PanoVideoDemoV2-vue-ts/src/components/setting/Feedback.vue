@@ -72,7 +72,7 @@ export default {
         { value: '3', text: '白板问题' },
       ],
       info: {
-        product: window.IS_ELECTRON ? 'PanoVideoCall' : 'webpvc',
+        product: window.IS_ELECTRON ? '在线会议' : 'webpvc',
         type: '0',
         description: '',
         contact: '',

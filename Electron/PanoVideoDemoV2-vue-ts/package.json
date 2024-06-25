@@ -1,5 +1,5 @@
 {
-  "name": "pano-video-call",
+  "name": "7hz-video-call",
   "version": "1.7.2",
   "private": true,
   "scripts": {
@@ -12,7 +12,8 @@
     "postuninstall": "electron-builder install-app-deps",
     "pkg:mac": "cross-env PLATFORM=mac USE_HARD_LINKS=false npm run build ",
     "pkg:win": "cross-env PLATFORM=win npm run build",
-    "pkg:linux": "yarn build && electron-builder build --linux"
+    "pkg:linux": "yarn build && electron-builder build --linux",
+    "pkg": "vue-cli-service electron:build"
   },
   "main": "background.js",
   "dependencies": {
@@ -22,6 +23,7 @@
     "@pano.video/panorts": "^2.4.3",
     "@types/crypto-js": "^4.0.2",
     "ant-design-vue": "^1.7.8",
+    "axios": "^1.7.2",
     "babel-loader": "^8.2.3",
     "core-js": "^3.6.5",
     "crypto-js": "^4.1.1",

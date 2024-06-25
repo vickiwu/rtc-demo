@@ -1,14 +1,14 @@
 <template>
   <div class="web-preview">
     <div class="page-header">
-      <a
+      <!-- <a
         href="https://www.pano.video"
         target="_blank"
         :style="{ opacity: 1 }"
         rel="noreferrer"
       >
         <img alt="logo" src="../assets/img/logo.png" />
-      </a>
+      </a> -->
     </div>
     <div class="device-container">
       <div class="video-wrapper">
@@ -273,7 +273,7 @@
         <img src="../assets/img/browser-permission.png" alt="浏览器权限" />
         <h4>无法访问{{ notAllowedDeviceText }}</h4>
         <p>
-          demo.pano.video需要使用你的麦克风和摄像头，<br />请点击浏览器地址栏中的锁图标更改设置，并重新加载网页
+          demo.video需要使用你的麦克风和摄像头，<br />请点击浏览器地址栏中的锁图标更改设置，并重新加载网页
         </p>
         <a href="javascript:;" @click="notAllowedMaskClosed = true">关闭</a>
       </div>

@@ -59,7 +59,7 @@ const electronConfig = {
         productName: APP_NAME,
         appId: 'video.pano.PanoCall',
         directories: {
-          buildResources: 'config/icons',
+          buildResources: 'build/icons',
         },
         dmg: {
           sign: false,
@@ -69,9 +69,9 @@ const electronConfig = {
           hardenedRuntime: true,
           asar: false,
           gatekeeperAssess: false,
-          identity: '',
-          entitlements: 'config/mac/entitlements.mac.plist',
-          entitlementsInherit: 'config/mac/entitlements.mac.plist',
+          identity: 'VYQ54ZA867',
+          entitlements: 'build/mac/entitlements.mac.plist',
+          entitlementsInherit: 'build/mac/entitlements.mac.plist',
           extendInfo: {
             NSMicrophoneUsageDescription: '请允许本程序访问您的麦克风',
             NSCameraUsageDescription: '请允许本程序访问您的摄像头',
@@ -100,9 +100,9 @@ const electronConfig = {
           signingHashAlgorithms: ['sha256', 'sha1'],
           signDlls: true,
           rfc3161TimeStampServer: 'http://timestamp.digicert.com',
-          sign: 'config/win/sign.js',
+          // sign: 'build/win/sign.js',
         },
-        afterSign: 'config/mac/notarize.js',
+        // afterSign: 'build/mac/notarize.js',
       },
     },
   },
