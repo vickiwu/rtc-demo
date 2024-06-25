@@ -287,11 +287,11 @@ export default {
         const time = Date.now() - startTime;
         if (time >= totalTime) {
           this.compatibilityProgress = '100%';
-          if (!window.rtcEngine.checkEnvRequirement()) {
-            this.compatibilityResult = false;
-          } else {
-            this.compatibilityResult = true;
-          }
+          // if (!window.rtcEngine.checkEnvRequirement()) {
+          //   this.compatibilityResult = false;
+          // } else {
+          this.compatibilityResult = true;
+          // }
           this.goTestMic();
         } else {
           this.compatibilityProgress = `${Math.round(

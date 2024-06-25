@@ -26,47 +26,45 @@ export const resolutionOptions = {
 };
 export const defaultResolution = '8';
 
-export const IOS_DOWNLOAD_URL =
-  'https://apps.apple.com/cn/app/pano-video-call/id1508485860';
-export const ANDROID_DOWNLOAD_URL =
-  'https://www.pano.video/download/在线会议_1.2.4.apk';
+export const IOS_DOWNLOAD_URL = '/app/pano-video-call/id1508485860';
+export const ANDROID_DOWNLOAD_URL = '#/download/云声会议_1.2.4.apk';
 
 export const MOMENT_FOR_UNSUBSCRIBE = 0;
 
 export const stamps = [
   {
     id: 'star',
-    url: 'https://www.pano.video/download/stamp/star.png',
+    url: '#/download/stamp/star.png',
     resizable: false,
   },
   {
     id: 'cross',
-    url: 'https://www.pano.video/download/stamp/cross.png',
+    url: '#/download/stamp/cross.png',
     resizable: false,
   },
   {
     id: 'heart',
-    url: 'https://www.pano.video/download/stamp/heart.png',
+    url: '#/download/stamp/heart.png',
     resizable: false,
   },
   {
     id: 'zan',
-    url: 'https://www.pano.video/download/stamp/zan.png',
+    url: '#/download/stamp/zan.png',
     resizable: false,
   },
   {
     id: 'tick',
-    url: 'https://www.pano.video/download/stamp/tick.png',
+    url: '#/download/stamp/tick.png',
     resizable: false,
   },
   {
     id: 'rocket',
-    url: 'https://www.pano.video/download/stamp/rocket.png',
+    url: '#/download/stamp/rocket.png',
     resizable: true,
   },
   {
     id: 'house',
-    url: 'https://www.pano.video/download/stamp/house.png',
+    url: '#/download/stamp/house.png',
     resizable: true,
   },
 ];

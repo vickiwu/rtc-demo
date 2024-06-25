@@ -346,24 +346,24 @@ export default {
   },
   mounted() {
     this.previewCode = 0;
-    if (!window.rtcEngine.checkEnvRequirement()) {
-      this.$notification.open({
-        message: '您使用的浏览器不兼容，点击这里查看',
-        description: (h) =>
-          h(
-            'a',
-            {
-              attrs: {
-                href: '#',
-                target: '_blank',
-              },
-            },
-            '浏览器兼容性'
-          ),
-        duration: 0,
-      });
-      return;
-    }
+    // if (!window.rtcEngine.checkEnvRequirement()) {
+    //   this.$notification.open({
+    //     message: '您使用的浏览器不兼容，点击这里查看',
+    //     description: (h) =>
+    //       h(
+    //         'a',
+    //         {
+    //           attrs: {
+    //             href: '#',
+    //             target: '_blank',
+    //           },
+    //         },
+    //         '浏览器兼容性'
+    //       ),
+    //     duration: 0,
+    //   });
+    //   return;
+    // }
     this.getMicList(() => {
       if (this.audioOpen) {
         this.testMic();

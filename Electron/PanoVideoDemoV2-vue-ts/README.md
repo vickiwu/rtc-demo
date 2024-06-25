@@ -1,6 +1,6 @@
 # pano-video-call-vue-ts
 
-在线会议 是基于 [pano](https://pano.video) sdk
+云声会议 是基于 [pano](https://pano.video) sdk
  构建的会议软件，支持高性能实时音视频、白板、桌面共享、音频共享、远程控制等。
 
 本项目使用 `Vue2.x + Typescript + electron` 编写，同一套代码支持 `web/mac/windows`平台。
@@ -22,7 +22,7 @@
 ### 文件目录介绍
 
 ```
-pano-video-call-vue
+CloudSoundMeeting
 ├─ babel.config.js
 ├─ build  # 打包相关配置
 │  ├─ icons   # app图标

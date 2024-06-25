@@ -15,6 +15,27 @@
         </a>
       </div> -->
       <a-form :form="form2" @submit.prevent="goJoin2" class="tableListForm">
+        <a-form-item label="会议号">
+          <a-input
+            name="meetId"
+            v-decorator="[
+              'meetId',
+              {
+                initialValue: lastChannelId2,
+                rules: [
+                  {
+                    required: true,
+                    message: '请输入不超过20位的房间号(只允许数字)',
+                  },
+                  {
+                    pattern: /^[0-9a-zA-Z]{1,20}$/,
+                    message: '请输入不超过20位的房间号(只允许数字)',
+                  },
+                ],
+              },
+            ]"
+          />
+        </a-form-item>
         <a-form-item label="账号" v-if="!pocEnabled">
           <a-input
             name="mobileNo"
@@ -32,21 +53,18 @@
             ]"
           />
         </a-form-item>
-        <a-form-item label="会议号">
+        <!-- 密码 -->
+        <a-form-item label="密码" v-if="!pocEnabled">
           <a-input
-            name="meetId"
+            name="psw"
             v-decorator="[
-              'meetId',
+              'psw',
               {
-                initialValue: lastChannelId2,
+                initialValue: lastToken2,
                 rules: [
                   {
                     required: true,
-                    message: '请输入不超过20位的房间号(只允许字母和数字)',
-                  },
-                  {
-                    pattern: /^[0-9a-zA-Z]{1,20}$/,
-                    message: '请输入不超过20位的房间号(只允许字母和数字)',
+                    message: '请输入密码',
                   },
                 ],
               },
@@ -273,6 +291,8 @@ const LS_KEY_POC = 'LS_KEY_POC';
 const LS_KEY_APPID2 = 'LS_KEY_APPID2';
 // 会议号
 const LS_KEY_CHANNELID2 = 'LS_KEY_CHANNELID2';
+// 密码
+const LS_KEY_TOKEN2 = 'LS_KEY_TOKEN2';
 
 export default {
   mixins: window.IS_ELECTRON ? [LoginMixin] : [],
@@ -304,11 +324,13 @@ export default {
       lastUserId: localStorage.getItem(LS_KEY_USERID) || '',
       meetId: null,
       mobileNo: null,
+      psw: null,
       lastAppId2: localStorage.getItem(LS_KEY_APPID2) || '',
       lastChannelId2:
         this.$route.params.meetId ||
         localStorage.getItem(LS_KEY_CHANNELID2) ||
         '',
+      lastToken2: localStorage.getItem(LS_KEY_TOKEN2) || '',
     };
   },
   components: {
@@ -359,17 +381,16 @@ export default {
         if (err) return;
         this.meetId = values.meetId;
         this.mobileNo = values.mobileNo;
+        this.psw = values.psw;
         localStorage.setItem(LS_KEY_CHANNELID2, this.meetId);
         localStorage.setItem(LS_KEY_APPID2, this.mobileNo);
-        // 调用http接口  http://180.76.231.201:9000/saas/meet/get/info?md=081&cmd=100
+        localStorage.setItem(LS_KEY_TOKEN2, this.psw);
         axios
-          .post(
-            `http://180.76.231.201:9000/saas/meet/get/info?md=081&cmd=100`,
-            {
-              meetId: +this.meetId,
-              mobileNo: this.mobileNo,
-            }
-          )
+          .post(`https://fim.5instars.com/saas/meet/get/info?md=081&cmd=100`, {
+            meetId: +this.meetId,
+            mobileNo: this.mobileNo,
+            psw: this.psw,
+          })
           .then((res) => {
             console.log('res', res);
             if (res.data.code === 0) {
@@ -528,13 +549,14 @@ export default {
         title: '提示',
         content: SAFARI_15_1_MESSAGE.content,
       });
-    } else if (!window.rtcEngine.checkEnvRequirement()) {
-      this.$Modal.info({
-        title: '提示',
-        content: `当前浏览器可能无法使用在线会议，建议使用Chrome浏览器（主版本号不小于69）`,
-      });
-      return;
     }
+    // else if (!window.rtcEngine.checkEnvRequirement()) {
+    //   this.$Modal.info({
+    //     title: '提示',
+    //     content: `当前浏览器可能无法使用云声会议，建议使用Chrome浏览器（主版本号不小于69）`,
+    //   });
+    //   return;
+    // }
   },
 };
 </script>

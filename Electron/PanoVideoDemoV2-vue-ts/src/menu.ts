@@ -44,14 +44,14 @@ export default class MenuBuilder {
 
   buildDarwinTemplate(): MenuItemConstructorOptions[] {
     const subMenuAbout: DarwinMenuItemConstructorOptions = {
-      label: '在线会议',
+      label: '云声会议',
       submenu: [
         {
-          label: '关于 在线会议',
+          label: '关于 云声会议',
           selector: 'orderFrontStandardAboutPanel:',
         },
         {
-          label: '隐藏 在线会议',
+          label: '隐藏 云声会议',
           accelerator: 'Command+H',
           selector: 'hide:',
         },

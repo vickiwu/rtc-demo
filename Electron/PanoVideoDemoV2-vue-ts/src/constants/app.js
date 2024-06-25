@@ -1,3 +1,3 @@
 module.exports = {
-  APP_NAME: '在线会议',
+  APP_NAME: '云声会议',
 };
