@@ -1,14 +1,14 @@
 <template>
   <div class="web-preview">
     <div class="page-header">
-      <a
-        href="https://www.pano.video"
+      <!-- <a
+        href="#"
         target="_blank"
         :style="{ opacity: 1 }"
         rel="noreferrer"
       >
         <img alt="logo" src="../assets/img/logo.png" />
-      </a>
+      </a> -->
     </div>
     <div class="device-container">
       <div class="video-wrapper">
@@ -354,7 +354,7 @@ export default {
             'a',
             {
               attrs: {
-                href: 'https://www.pano.video/',
+                href: '#',
                 target: '_blank',
               },
             },

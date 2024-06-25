@@ -1,20 +1,90 @@
 <template>
   <div v-if="step === 0">
     <div class="main">
-      <div v-if="$IS_ELECTRON" class="logo">
+      <!-- <div v-if="$IS_ELECTRON" class="logo">
         <img alt="logo" src="../../assets/img/logo.png" />
       </div>
       <div v-else class="logo">
         <a
-          href="https://www.pano.video"
+          href="#"
           target="_blank"
           :style="{ opacity: 1 }"
           rel="noreferrer"
         >
           <img alt="logo" src="../../assets/img/logo.png" />
         </a>
-      </div>
-      <a-form :form="form" @submit.prevent="goJoin" class="tableListForm">
+      </div> -->
+      <a-form :form="form2" @submit.prevent="goJoin2" class="tableListForm">
+        <a-form-item label="账号" v-if="!pocEnabled">
+          <a-input
+            name="mobileNo"
+            v-decorator="[
+              'mobileNo',
+              {
+                initialValue: lastAppId2,
+                rules: [
+                  {
+                    required: true,
+                    message: '请输入账号',
+                  },
+                ],
+              },
+            ]"
+          />
+        </a-form-item>
+        <a-form-item label="会议号">
+          <a-input
+            name="meetId"
+            v-decorator="[
+              'meetId',
+              {
+                initialValue: lastChannelId2,
+                rules: [
+                  {
+                    required: true,
+                    message: '请输入不超过20位的房间号(只允许字母和数字)',
+                  },
+                  {
+                    pattern: /^[0-9a-zA-Z]{1,20}$/,
+                    message: '请输入不超过20位的房间号(只允许字母和数字)',
+                  },
+                ],
+              },
+            ]"
+          />
+        </a-form-item>
+        <a-row v-if="$IS_ELECTRON" :style="{ marginTop: '20px' }">
+          <a-col :span="8">
+            <a-checkbox :checked="!autoMuteAudio" @change="setAudioOpen">
+              开启麦克风
+            </a-checkbox>
+          </a-col>
+          <a-col :span="8">
+            <a-checkbox :checked="autoOpenVideo" @change="setVideoOpen">
+              开启摄像头
+            </a-checkbox>
+          </a-col>
+          <a-col span="2">
+            <a-button @click="openSetting" type="link">
+              <a-icon type="setting" :style="{ color: '#888' }" />
+            </a-button>
+          </a-col>
+        </a-row>
+        <div class="join-submit">
+          <a-button
+            class="submit"
+            type="primary"
+            html-type="submit"
+            :loading="joinLoading"
+          >
+            立即加入
+          </a-button>
+          <Tooltip placement="top" title="私有化设置" class="poc-setting">
+            <a-icon type="setting" @click="togglePoc" />
+          </Tooltip>
+        </div>
+      </a-form>
+      <a-form :form="form" @submit.prevent="goJoin" class="tableListForm2">
         <a-form-item label="AppId" v-if="!pocEnabled">
           <a-input
             name="appId"
@@ -191,6 +261,7 @@ import PocSetting from '@/components/PocSetting.vue';
 import { RtcMessage, RtsService } from '@pano.video/panorts';
 import { genPocToken } from '@/utils';
 import { LogUtil } from '@/utils';
+import axios from 'axios';
 
 const LS_KEY_USERNAME = 'LS_KEY_USERNAME';
 const LS_KEY_CHANNELID = 'LS_KEY_CHANNELID';
@@ -198,6 +269,10 @@ const LS_KEY_APPID = 'LS_KEY_APPID';
 const LS_KEY_TOKEN = 'LS_KEY_TOKEN';
 const LS_KEY_USERID = 'LS_KEY_USERID';
 const LS_KEY_POC = 'LS_KEY_POC';
+// 账号
+const LS_KEY_APPID2 = 'LS_KEY_APPID2';
+// 会议号
+const LS_KEY_CHANNELID2 = 'LS_KEY_CHANNELID2';
 
 export default {
   mixins: window.IS_ELECTRON ? [LoginMixin] : [],
@@ -208,6 +283,7 @@ export default {
       pocConfig: { serverAddr: '', appSecret: '', appId: '' },
       joinLoading: false,
       form: this.$form.createForm(this, { name: 'login' }),
+      form2: this.$form.createForm(this, { name: 'login2' }),
       settingShow: false,
       msJoinSuccess: false,
       channelId: null,
@@ -223,8 +299,16 @@ export default {
         '',
       lastUserName: localStorage.getItem(LS_KEY_USERNAME) || '',
       lastAppId: localStorage.getItem(LS_KEY_APPID) || '',
+
       lastToken: localStorage.getItem(LS_KEY_TOKEN) || '',
       lastUserId: localStorage.getItem(LS_KEY_USERID) || '',
+      meetId: null,
+      mobileNo: null,
+      lastAppId2: localStorage.getItem(LS_KEY_APPID2) || '',
+      lastChannelId2:
+        this.$route.params.meetId ||
+        localStorage.getItem(LS_KEY_CHANNELID2) ||
+        '',
     };
   },
   components: {
@@ -267,37 +351,65 @@ export default {
       this.$store.commit(mutations.SET_OPEN_VIDEO_JOIN, value);
       localStorage.setItem(localCacheKeyOpenCamAtStart, value ? 'yes' : 'no');
     },
-    goJoin() {
-      this.form.validateFields((err, values) => {
+    goJoin2() {
+      console.log('this.form', this.form2);
+      this.form2.validateFields((err, values) => {
+        console.log('values', values);
+        console.log('err', err);
         if (err) return;
-        this.channelId = values.channelId;
-        this.userName = values.username;
-        this.userId = values.userId;
-        if (this.pocEnabled) {
-          this.appId = this.pocConfig.appId;
-          this.token = genPocToken(
-            this.pocConfig.appId,
-            this.channelId,
-            this.userId,
-            this.pocConfig.appSecret
-          );
-          window.RtcEngine.setServer(this.pocConfig.serverAddr);
-          RtsService.setServer(this.pocConfig.serverAddr);
-        } else {
-          this.appId = values.appId;
-          this.token = values.token;
-        }
-        localStorage.setItem(LS_KEY_USERNAME, this.userName);
-        localStorage.setItem(LS_KEY_CHANNELID, this.channelId);
-        localStorage.setItem(LS_KEY_APPID, this.appId);
-        localStorage.setItem(LS_KEY_TOKEN, this.token);
-        localStorage.setItem(LS_KEY_USERID, this.userId);
-        if (this.$IS_ELECTRON) {
-          this.joinChannel();
-        } else {
-          this.step = 2;
-        }
+        this.meetId = values.meetId;
+        this.mobileNo = values.mobileNo;
+        localStorage.setItem(LS_KEY_CHANNELID2, this.meetId);
+        localStorage.setItem(LS_KEY_APPID2, this.mobileNo);
+        // 调用http接口  http://180.76.231.201:9000/saas/meet/get/info?md=081&cmd=100
+        axios
+          .post(
+            `http://180.76.231.201:9000/saas/meet/get/info?md=081&cmd=100`,
+            {
+              meetId: +this.meetId,
+              mobileNo: this.mobileNo,
+            }
+          )
+          .then((res) => {
+            console.log('res', res);
+            if (res.data.code === 0) {
+              this.appId = res.data.data.appId;
+              this.token = res.data.data.token;
+              this.userName = res.data.data.userName;
+              this.userId = res.data.data.userId;
+              this.channelId = res.data.data.meetNo;
+              this.goJoin();
+            } else {
+              this.$Modal.info({
+                title: '提示',
+                content: `获取会议信息失败，因为${res.data.msg}`,
+              });
+            }
+          });
       });
+    },
+    goJoin() {
+      if (this.pocEnabled) {
+        this.appId = this.pocConfig.appId;
+        this.token = genPocToken(
+          this.pocConfig.appId,
+          this.channelId,
+          this.userId,
+          this.pocConfig.appSecret
+        );
+        window.RtcEngine.setServer(this.pocConfig.serverAddr);
+        RtsService.setServer(this.pocConfig.serverAddr);
+      }
+      localStorage.setItem(LS_KEY_USERNAME, this.userName);
+      localStorage.setItem(LS_KEY_CHANNELID, this.channelId);
+      localStorage.setItem(LS_KEY_APPID, this.appId);
+      localStorage.setItem(LS_KEY_TOKEN, this.token);
+      localStorage.setItem(LS_KEY_USERID, this.userId);
+      if (this.$IS_ELECTRON) {
+        this.joinChannel();
+      } else {
+        this.step = 2;
+      }
     },
     async joinChannel() {
       this.joinLoading = true;
@@ -457,8 +569,17 @@ export default {
     width: 260px;
   }
 }
-
 .tableListForm {
+  /deep/ .ant-form-item {
+    margin-right: 0;
+    margin-bottom: 5px;
+  }
+  /deep/ .ant-form-item-control-wrapper {
+    flex: 1;
+  }
+}
+.tableListForm2 {
+  display: none;
   /deep/ .ant-form-item {
     margin-right: 0;
     margin-bottom: 5px;
