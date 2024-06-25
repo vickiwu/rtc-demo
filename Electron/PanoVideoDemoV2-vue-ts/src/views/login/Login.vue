@@ -57,6 +57,7 @@
         <a-form-item label="密码" v-if="!pocEnabled">
           <a-input
             name="psw"
+            type="password"
             v-decorator="[
               'psw',
               {
