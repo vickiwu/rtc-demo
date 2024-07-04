@@ -1,5 +1,5 @@
 <template>
-  <div class="pano-demo-root">
+  <div class="csb-demo-root">
     <router-view />
     <Setting />
   </div>
@@ -29,7 +29,7 @@ export default {
 </script>
 
 <style lang="scss">
-.pano-demo-root {
+.csb-demo-root {
   width: 100%;
   height: 100%;
 }

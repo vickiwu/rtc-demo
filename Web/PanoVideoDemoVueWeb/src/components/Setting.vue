@@ -2,7 +2,7 @@
   <el-dialog
     :visible="settingVisible"
     center
-    class="pano-setting-modal"
+    class="csb-setting-modal"
     destroy-on-close
     @close="onClose"
   >
@@ -189,7 +189,7 @@ export default {
 </script>
 
 <style lang="scss">
-.pano-setting-modal {
+.csb-setting-modal {
   .el-dialog,
   .el-dialog__body,
   .setting_wrapper {

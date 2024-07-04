@@ -2,11 +2,35 @@
   <div>
     <div class="main">
       <div class="logo">
-        <a href="https://www.pano.video" target="_blank" rel="noreferrer">
-          <img alt="logo" :src="logopng" />
-        </a>
+          <img alt="logo" :src="logopng"  style="width: 150px;"/>
       </div>
-      <el-form class="tableListForm" :model="form" v-loading="loading">
+      <el-form class="tableListForm" :model="form2" v-loading="loading">
+        <el-form-item label="房间号" key="meetId" required  placeholder="仅限数字"
+       >
+          <el-input clearable v-model="form2.meetId" />
+        </el-form-item>
+        <el-form-item label="用户名" key="mobileNo" required>
+          <el-input clearable v-model="form2.mobileNo" />
+        </el-form-item>
+        <el-form-item label="密码" key="psw" required>
+          <el-input
+            clearable
+            type="password"
+            v-model="form2.psw"
+          />
+        </el-form-item>
+      <br>  
+        <el-form-item>
+          <el-button
+            style="width: 100%;"
+            type="primary"
+            @click="joinChannel2"
+            round
+            >加入通话</el-button
+          >
+        </el-form-item>
+      </el-form>
+      <el-form class="tableListForm" :model="form" v-if="false" v-loading="loading">
         <el-form-item label="AppId" key="appid" required>
           <el-input clearable v-model="form.appId" />
         </el-form-item>
@@ -24,7 +48,6 @@
             clearable
             v-model="form.userId"
             placeholder="用户ID仅限数字"
-            oninput="value=value.replace(/[^\d]/g,'')"
           />
         </el-form-item>
         <el-row>
@@ -86,11 +109,17 @@ import logopng from '@/assets/img/logo.png';
 import { mapMutations, mapGetters } from 'vuex';
 import * as Constants from '../constants';
 import PanoRtc, { statusCodeToQResult } from '@pano.video/panortc';
+import axios from 'axios';
 
 export default {
   data() {
     return {
       logopng,
+      form2: {
+        meetId: '',
+        mobileNo: '',
+        psw: ''
+      },
       form: {
         channelId: '',
         userName: '',
@@ -117,6 +146,35 @@ export default {
       'setMeetingStatus',
       'resetMeetingStore'
     ]),
+    async joinChannel2() {
+      const { meetId, mobileNo, psw } = this.form2;
+      if (!meetId || !mobileNo || !psw) {
+        this.$message.warning('请填写必要的参数再加入会议');
+        return;
+      }
+      this.loading = true;
+      axios
+          .post(`https://fim.5instars.com/saas/meet/get/info?md=081&cmd=100`, {
+            meetId: +this.form2.meetId,
+            mobileNo: this.form2.mobileNo,
+            psw: this.form2.psw,
+          })
+          .then((res) => {
+            this.loading = false;
+            console.log('res', res);
+            if (res.data.code === 0) {
+              this.form.appId = res.data.data.appId;
+              this.form.token = res.data.data.token;
+              this.form.userName = res.data.data.userName;
+              this.form.userId = res.data.data.userId;
+              this.form.channelId = res.data.data.meetNo;
+              this.joinChannel();
+            } else {
+              this.$message.error(res.data.msg || '获取会议信息失败');
+            }
+
+          });
+    },
     /**
      * 加会逻辑
      */

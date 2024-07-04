@@ -1,13 +1,13 @@
 <template>
-  <div class="pano-wb-at">
+  <div class="csb-wb-at">
     <!-- 选择 -->
     <div
       :class="{
-        'pano-wb-at__item': true,
-        'pano-wb-at__item--selected': insertType === Constants.ShapeType.Select
+        'csb-wb-at__item': true,
+        'csb-wb-at__item--selected': insertType === Constants.ShapeType.Select
       }"
       @click="setToolType(Constants.ShapeType.Select)"
-      class="pano-wb-at__item "
+      class="csb-wb-at__item "
     >
       <span class="iconfont icon-move" />
     </div>
@@ -15,8 +15,8 @@
     <!-- 画笔 -->
     <div
       :class="{
-        'pano-wb-at__item': true,
-        'pano-wb-at__item--selected': insertType === Constants.ShapeType.Pen
+        'csb-wb-at__item': true,
+        'csb-wb-at__item--selected': insertType === Constants.ShapeType.Pen
       }"
       @click="setToolType(Constants.ShapeType.Pen)"
     >
@@ -25,12 +25,12 @@
 
     <!-- 空心图形 -->
     <Popover placement="top" trigger="click">
-      <div class="pano-wb-popup">
-        <div class="pano-wb-popup__item">
+      <div class="csb-wb-popup">
+        <div class="csb-wb-popup__item">
           <div
             :class="{
-              'pano-wb-popup__item__select': true,
-              'pano-wb-popup__item__select--selected':
+              'csb-wb-popup__item__select': true,
+              'csb-wb-popup__item__select--selected':
                 insertType === Constants.ShapeType.Line
             }"
             @click="setToolType(Constants.ShapeType.Line)"
@@ -39,8 +39,8 @@
           </div>
           <div
             :class="{
-              'pano-wb-popup__item__select': true,
-              'pano-wb-popup__item__select--selected':
+              'csb-wb-popup__item__select': true,
+              'csb-wb-popup__item__select--selected':
                 insertType === Constants.ShapeType.Arrow
             }"
             @click="setToolType(Constants.ShapeType.Arrow)"
@@ -49,8 +49,8 @@
           </div>
           <div
             :class="{
-              'pano-wb-popup__item__select': true,
-              'pano-wb-popup__item__select--selected':
+              'csb-wb-popup__item__select': true,
+              'csb-wb-popup__item__select--selected':
                 fillType === 'none' &&
                 insertType === Constants.ShapeType.Ellipse
             }"
@@ -60,8 +60,8 @@
           </div>
           <div
             :class="{
-              'pano-wb-popup__item__select': true,
-              'pano-wb-popup__item__select--selected':
+              'csb-wb-popup__item__select': true,
+              'csb-wb-popup__item__select--selected':
                 fillType === 'none' && insertType === Constants.ShapeType.Rect
             }"
             @click="setToolType(Constants.ShapeType.Rect)"
@@ -69,11 +69,11 @@
             <span class="iconfont icon-checkbox-unchecked" />
           </div>
         </div>
-        <div class="pano-wb-popup__item">
+        <div class="csb-wb-popup__item">
           <div
             :class="{
-              'pano-wb-popup__item__select': true,
-              'pano-wb-popup__item__select--selected':
+              'csb-wb-popup__item__select': true,
+              'csb-wb-popup__item__select--selected':
                 fillType === 'color' &&
                 insertType === Constants.ShapeType.Ellipse
             }"
@@ -83,8 +83,8 @@
           </div>
           <div
             :class="{
-              'pano-wb-popup__item__select': true,
-              'pano-wb-popup__item__select--selected':
+              'csb-wb-popup__item__select': true,
+              'csb-wb-popup__item__select--selected':
                 fillType === 'color' && insertType === Constants.ShapeType.Rect
             }"
             @click="setSolidToolType(Constants.ShapeType.Rect)"
@@ -95,8 +95,8 @@
       </div>
       <div
         :class="{
-          'pano-wb-at__item': true,
-          'pano-wb-at__item--selected':
+          'csb-wb-at__item': true,
+          'csb-wb-at__item--selected':
             fillType === 'none' &&
             (insertType === Constants.ShapeType.Line ||
               insertType === Constants.ShapeType.Arrow ||
@@ -106,7 +106,7 @@
         slot="reference"
       >
         <span class="iconfont icon-hollow" />
-        <div class="pano-wb-at__item__triangle" />
+        <div class="csb-wb-at__item__triangle" />
       </div>
     </Popover>
 
@@ -114,20 +114,20 @@
     <Popover placement="top" trigger="click">
       <div
         :class="{
-          'pano-wb-at__item': true,
-          'pano-wb-at__item--selected': insertType === Constants.ShapeType.Text
+          'csb-wb-at__item': true,
+          'csb-wb-at__item--selected': insertType === Constants.ShapeType.Text
         }"
         slot="reference"
         @click="setToolType(Constants.ShapeType.Text)"
       >
         <span class="iconfont icon-text" />
-        <div class="pano-wb-at__item__triangle" />
+        <div class="csb-wb-at__item__triangle" />
       </div>
-      <div class="pano-wb-popup">
+      <div class="csb-wb-popup">
         <div
           :class="{
-            'pano-wb-popup__item__select': true,
-            'pano-wb-popup__item__select--selected': bold
+            'csb-wb-popup__item__select': true,
+            'csb-wb-popup__item__select--selected': bold
           }"
           @click="toggleBold"
         >
@@ -135,8 +135,8 @@
         </div>
         <div
           :class="{
-            'pano-wb-popup__item__select': true,
-            'pano-wb-popup__item__select--selected': italic
+            'csb-wb-popup__item__select': true,
+            'csb-wb-popup__item__select--selected': italic
           }"
           @click="toggleItalic"
         >
@@ -147,9 +147,9 @@
 
     <!-- 工具箱 -->
     <Popover placement="top" trigger="click">
-      <div class="pano-wb-popup">
-        <div class="pano-wb-popup__item">
-          <span class="pano-wb-popup__item__label">线宽：</span>
+      <div class="csb-wb-popup">
+        <div class="csb-wb-popup__item">
+          <span class="csb-wb-popup__item__label">线宽：</span>
           <el-slider
             :value="lineWidth"
             @input="setLineWidth"
@@ -159,8 +159,8 @@
             style="flex: 1; max-width: 140px"
           />
         </div>
-        <div class="pano-wb-popup__item">
-          <span class="pano-wb-popup__item__label">字号：</span>
+        <div class="csb-wb-popup__item">
+          <span class="csb-wb-popup__item__label">字号：</span>
           <el-slider
             :step="2"
             :min="12"
@@ -170,17 +170,17 @@
             style="flex: 1; max-width: 140px"
           />
         </div>
-        <div class="pano-wb-popup__item">
+        <div class="csb-wb-popup__item">
           <div
             v-for="color in colors"
-            class="pano-wb-popup__item__colors"
+            class="csb-wb-popup__item__colors"
             :key="color"
             @click="selectColor(color)"
           >
             <div
               :class="{
-                'pano-wb-popup__item__colors__color-dot': true,
-                'pano-wb-popup__item__colors__color-dot--selected':
+                'csb-wb-popup__item__colors__color-dot': true,
+                'csb-wb-popup__item__colors__color-dot--selected':
                   selectedColor === color
               }"
               :style="{
@@ -191,10 +191,10 @@
         </div>
       </div>
 
-      <div class="pano-wb-at__item" slot="reference">
+      <div class="csb-wb-at__item" slot="reference">
         <span class="iconfont icon-tools" />
         <div
-          class="pano-wb-at__item__color-dot"
+          class="csb-wb-at__item__color-dot"
           :style="{ backgroundColor: selectedColor }"
         />
       </div>
@@ -202,12 +202,12 @@
 
     <!-- 橡皮擦 -->
     <Popover placement="top" trigger="click">
-      <div class="pano-wb-popup">
-        <div class="pano-wb-popup__item">
+      <div class="csb-wb-popup">
+        <div class="csb-wb-popup__item">
           <div
             :class="{
-              'pano-wb-popup__item__select': true,
-              'pano-wb-popup__item__select--selected':
+              'csb-wb-popup__item__select': true,
+              'csb-wb-popup__item__select--selected':
                 insertType === Constants.ShapeType.Eraser
             }"
             @click="
@@ -227,8 +227,8 @@
               }
             "
             :class="{
-              'pano-wb-popup__item__select': true,
-              'pano-wb-popup__item__select--selected':
+              'csb-wb-popup__item__select': true,
+              'csb-wb-popup__item__select--selected':
                 insertType === Constants.ShapeType.Delete
             }"
           >
@@ -237,17 +237,17 @@
         </div>
       </div>
 
-      <div class="pano-wb-at__item" slot="reference">
+      <div class="csb-wb-at__item" slot="reference">
         <span class="iconfont icon-eraser" />
-        <div class="pano-wb-at__item__triangle" />
+        <div class="csb-wb-at__item__triangle" />
       </div>
     </Popover>
 
     <!-- 激光笔 -->
     <div
       :class="{
-        'pano-wb-at__item': true,
-        'pano-wb-at__item--selected':
+        'csb-wb-at__item': true,
+        'csb-wb-at__item--selected':
           insertType === Constants.ShapeType.LaserPointer
       }"
       @click="setToolType(Constants.ShapeType.LaserPointer)"
@@ -256,12 +256,12 @@
     </div>
 
     <!-- 撤销 -->
-    <div @click="undo" class="pano-wb-at__item">
+    <div @click="undo" class="csb-wb-at__item">
       <span class="iconfont icon-undo" />
     </div>
 
     <!-- 重做 -->
-    <div @click="redo" class="pano-wb-at__item">
+    <div @click="redo" class="csb-wb-at__item">
       <span class="iconfont icon-redo" />
     </div>
   </div>
@@ -293,7 +293,7 @@ export default {
     return {
       Constants,
       colors,
-      imgUrl: 'https://developer.pano.video/download/example.jpeg',
+      imgUrl: '',
       imgScaleMode: Constants.WBImageScalingMode.Fit,
       fontSize: this.whiteboard.fontSize,
       bold: this.whiteboard.bold,
@@ -487,11 +487,11 @@ $fixed-left: 40px;
   min-width: 40px !important;
 }
 
-.pano-wb-at * {
+.csb-wb-at * {
   user-select: none;
 }
 
-.pano-wb-at {
+.csb-wb-at {
   border-radius: 5px;
   font-size: 12px;
   padding: 5px;
@@ -549,7 +549,7 @@ $fixed-left: 40px;
   }
 }
 
-.pano-wb-popup {
+.csb-wb-popup {
   font-size: 12px;
   &__item {
     display: flex;
